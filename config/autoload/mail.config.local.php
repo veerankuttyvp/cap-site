@@ -10,8 +10,8 @@ return array(
 				'port' => '587',
 				//'port' => 25,
 				'connection_config' => array(
-					'username' => 'eightyco',
-					'password' => 'sendgrid3ightyc0',
+					'username' => '',
+					'password' => '',
 					'ssl' => 'tls'
 				),
 			),
