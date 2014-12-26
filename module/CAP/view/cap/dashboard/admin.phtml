@@ -1,0 +1,211 @@
+<div class="row" ng-controller="DashboardCtrl", ng-init="init()" id="dashboard">
+
+    <div class="col-xs-10 col-xs-offset-1">
+        <?php
+            echo $this->partial('/cap/partials/assign-mentee-modal');
+            echo $this->partial('/cap/partials/assign-saq-modal');
+            echo $this->partial('/cap/partials/saq-list');
+            echo $this->partial('/cap/partials/mentors-list');
+            echo $this->partial('/cap/partials/mentees-list');
+            echo $this->partial('/cap/partials/admins-list');
+        ?>
+    </div>
+</div>
+
+<?php if (0) {?>
+<body ng-controller="DashboardController" ng-init="init('<?php echo $user; ?>', '<?php echo $role; ?>')" id="dashboard">
+    <div class="overlay" ng-show="show_popup"></div>
+    <div class="container_div">
+        <div class="popup login_box" ng-show="show_popup">
+            <div id="assign_mentee_mentor">
+                <div class="popup_header login_header">
+                    <h3> Assign [[selected_mentee.firstName]] a mentor </h3>
+                    <a href="" ng-click="show_popup=false;" class="close_button"> X </a>
+                </div>
+                <div class="popup_table_container">
+                    <div class="search_box">
+                        <input type="text" name="search_mentor" ng-model="mentor_search_key" placeholder="Enter a Mentors Name..." ng-change="search_mentors()" />
+                        <span class="fa fa-search"></span>
+                    </div>
+                    <table class="table table-striped">
+                        <tr ng-repeat="mentor in mentors_result">
+                            <td> [[$index+1]] </td>
+                            <td> [[mentor.firstName]] </td>
+                            <td>
+                                <a href="" ng-click="assign_mentee_a_mentor(mentor)" class="assign_button bg_black"> ASSIGN </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div id="assign_mentee_saq">
+                <div class="popup_header login_header">
+                    <h3> Assign SAQ to a mentee </h3>
+                    <a href="" ng-click="show_popup=false;" class="close_button"> X </a>
+                </div>
+                <div class="popup_table_container">
+                    <div class="search_box">
+                        <input type="text" name="search_mentor" placeholder="Enter a Mentors Name..." ng-model="mentee_search_key" ng-change="search_mentees()"/>
+                        <span class="fa fa-search"></span>
+                    </div>
+                    <table class="table table-striped">
+                        <tr ng-repeat="mentee in mentees_result">
+                            <td> [[$index+1]] </td>
+                            <td> [[mentee.firstName]] </td>
+                            <td>
+                                <a href="" ng-click="assign_mentee_a_saq(mentee)" class="assign_button bg_black"> ASSIGN </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div id="create_new_note">
+                <div class="popup_header login_header">
+                    <h3> Create New Note </h3>
+                    <a href="" ng-click="show_popup=false;" class="close_button"> X </a>
+                </div>
+                <div class="popup_table_container">
+                    <div class="add_note">
+                        <p>
+                            <label> Title : </label>
+                            <input type="text" ng-model="current_note.title" />
+                        </p>
+                        <p ng-show="role_id == 5">
+                            <label> Share with mentee : </label>
+                            <input type="checkbox" ng-model="current_note.share_with_mentee" />
+                        </p>
+                        <p> <a href="" ng-click="save_new_note()" class="view_button"> Save </a> </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <?php  echo $this->menuview ?>
+        <?php if($role == 4){ ?>
+
+        <?php  } ?>
+        <?php if($role == 5){ ?>
+            <div class="table_container">
+                <span class="table_list_header"><span class="fa fa-mortar-board"></span> Mentees </span>
+                <table class="table table-striped">
+                        <tr>
+                            <th> # </th>
+                            <th> Name </th>
+                            <th> Status </th>
+                            <th> Actions </th>
+                            <th> &nbsp; </th>
+                        </tr>
+                        <tr ng-repeat="mentee in visible_mentees">
+                                <td> [[$index+1]] </td>
+                                <td> [[mentee.firstName]] </td>
+                                <td> [[mentee.status]] </td>
+                                <td>
+                                    <a href="/user/adminmentee/mentee/[[mentee.id]]" class="view_button" ng-show="user_type == 'Administrator'"> VIEW </a>
+                                    <a href="/user/mentor/mentee/[[mentee.id]]" ng-show="user_type == 'Mentor'" class="view_button"> VIEW </a>
+                                 </td>
+                        </tr>
+                </table>
+                <div class="page" ng-show="mentee_pages > 1">
+                    <ul class="pagination">
+                        <li class="arrow unavailable">
+                            <a href="" ng-click="select_mentee_page(-1)">&laquo;</a>
+                        </li>
+                        <li ng-repeat="page in range(mentee_pages)" ng-class="getClass($index+1)">
+                            <a href="" ng-click="select_mentee_page($index+1)">[[$index+1]]</a>
+                        </li>
+                        <!-- <li class="unavailable">
+                            <a href="">&hellip;</a>
+                        </li>  -->
+                        <li class="arrow">
+                            <a href="" ng-click="select_mentee_page(0)">&raquo;</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        <?php  } ?>
+        <?php if($role == 6){ ?>
+            <div class="table_container">
+                <span class="table_list_header"><span class="fa fa-file-text"></span> Skill Assessment Questionaries </span>
+                <table class="table table-striped">
+                    <tr>
+                        <th> # </th>
+                        <th> Name </th>
+                        <th> Status </th>
+                        <th> Actions </th>
+                    </tr>
+                    <tr ng-repeat="question in visible_questionairs">
+                        <td> [[$index+1]] </td>
+                        <td> [[question.name]] </td>
+                        <td> [[question.completion_status]] </td>
+                        <td>
+                            <a href="/user/saqlist/saqview/[[question.questionnaire_id]]" class="assign_button bg_black" ng-show="question.completion_status == 'COMPLETED' "> VIEW </a>
+                            <a href="/user/test/saq/[[question.questionnaire_id]]" class="assign_button bg_black" ng-show="question.completion_status == 'NOT STARTED' "> BEGIN </a>
+                        </td>
+                    </tr>
+                </table>
+                <div class="page" ng-show="que_pages > 1">
+                    <ul class="pagination">
+                        <li class="arrow unavailable">
+                            <a href="" ng-click="select_ques_page(-1)">&laquo;</a>
+                        </li>
+                        <li ng-repeat="page in range(que_pages)" ng-class="getClass($index+1)">
+                            <a href="" ng-click="select_ques_page($index+1)">[[$index+1]]</a>
+                        </li>
+                        <!-- <li class="unavailable">
+                            <a href="">&hellip;</a>
+                        </li>  -->
+                        <li class="arrow">
+                            <a href="" ng-click="select_ques_page(0)">&raquo;</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="table_container">
+                <span class="table_list_header">
+                    <span class="fa fa-bookmark"></span> Notes
+                </span>
+                <a href="" class="view_button create_note" ng-click="create_note()"> CREATE NEW NOTE </a>
+
+                <table class="table table-striped">
+                    <tr>
+                        <th> # </th>
+                        <th> Title </th>
+                        <th> Date </th>
+                        <th> Share w/ Mentee </th>
+                        <th> Actions </th>
+                        <th> &nbsp; </th>
+                    </tr>
+                    <tr ng-repeat="note in menteenotes">
+                        <td> [[$index+1]] </td>
+                        <td> [[note.title]] </td>
+                        <td> [[note.created]] </td>
+                        <td> &nbsp; </td>
+                        <td> <a href="" class="deactivate_button" ng-click="delete_note(note)" style="float: left; margin-right: 10px;"> DELETE </a> <a href="" class="assign_button" ng-click="edit_note(note)" style="float: left"> EDIT </a></td>
+                        <td>  </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="table_container">
+                <span class="table_list_header"><span class="fa fa-mortar-board"></span> Mentor </span>
+
+                  <table class="table table-striped">
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Phone Number</th>
+                        <th>Email Address</th>
+                        <th> &nbsp; </th>
+                   </tr>
+
+                  </table>
+            </div>
+
+
+        <?php  } ?>
+
+    </div>
+</body>
+
+<?php }?>

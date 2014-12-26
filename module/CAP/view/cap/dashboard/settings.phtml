@@ -1,0 +1,44 @@
+<?php $this->headScript()->prependFile($this->basePath() . '/js/admin.min.js') ?>
+<div class="row" ng-controller="SettingsCtrl" ng-init="init()">
+    <div class="col-xs-10 col-xs-offset-1">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1> Settings </h1>
+            </div>
+        </div>
+        <form class="settings-form form-inline row" name="settingsForm" ng-submit="saveSettings()">
+            <div class="col-xs-12">
+                <div class="row" ng-show="success">
+                    <div class="col-xs-12 login-error">
+                        <div ng-show="msg" class="alert alert-success">[[msg]]</div>
+                    </div>
+                </div>
+
+                <div class="row" ng-hide="success">
+                    <div class="col-xs-12 login-error">
+                        <div ng-show="loginForm.$dirty && msg" class="alert alert-warning">[[msg]]</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group settings-col reminder-frequency col-xs-12">
+                        <div class="row">
+                            <label class="col-sm-5">Reminder Frequency:</label>
+                            <div class="col-sm-7">
+                                <select ng-model="settings.reminderFrequency.frequency" ng-options="frequency for frequency in reminderFrequencies" class="form-control"></select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 settings-col">
+                        <button type="submit" value="Save" class="btn btn-primary">
+                            <span ng-hide="inProgress">Save</span>
+                            <i class="fa fa-cog fa-spin" ng-show="inProgress"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

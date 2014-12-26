@@ -1,0 +1,57 @@
+<div id="create-note-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+        	<span aria-hidden="true">
+        		<i class="fa fa-times"></i>
+        	</span>
+        	<span class="sr-only">Close</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Edit Note</h4>
+      </div>
+      <form novalidate ng-submit="createNote()" name="createNoteForm">
+	      <div class="modal-body">
+	        <div class="row">
+	        	<div class="col-xs-12">
+	          	<div class="row">
+	          		<div class="col-xs-12 form-group share-note-group">
+	          			<label>
+	          				<i ng-hide="modal.note.share" class="fa fa-square-o fa-fw"></i>
+	          				<i ng-show="modal.note.share" class="fa fa-check-square-o green fa-fw"></i>
+	          				<input type="checkbox" class="hide" name="share" ng-model="modal.note.share"/>
+	          				<span> Share this note?</span>
+	          			</label>
+	          		</div>
+	          	</div>
+	          	<div class="row">
+	          		<div class="col-xs-12 form-group">
+	          			<input class="form-control" type="text" name="name" ng-model="modal.note.name" placeholder="Enter a note title"/>
+	          		</div>
+	          	</div>
+	          	<div class="row">
+	          		<div class="col-xs-12 form-group">
+	          			<textarea ng-model="modal.note.note" placeholder="Enter note text" rows="10" class="form-control"></textarea>
+	          		</div>
+	          	</div>
+	          </div>
+	        </div>
+	      </div>
+	      <div class="modal-footer">
+	        <div class="row">
+	        	<div class="col-xs-6">
+	        		<button type="submit" ng-disabled="createInProgress" class="btn btn-primary form-control">
+	        			<i ng-show="createInProgress" class="fa fa-cog fa-spin fa-fw"></i>
+	        			<i ng-hide="createInProgress" class="fa fa-save fa-fw"></i>
+	        			<span>Create</span>
+	        		</button>
+	        	</div>
+	        	<div class="col-xs-6">
+	        		<a class="btn btn-danger form-control" data-dismiss="modal">Cancel</a>
+	        	</div>
+	        </div>
+	      </div>
+	    </form>
+    </div>
+  </div>
+</div>

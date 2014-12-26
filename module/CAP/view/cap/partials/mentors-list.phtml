@@ -1,0 +1,79 @@
+<div class="row" id="mentors" ng-show="mentors">
+    <div class="table-container col-xs-12">
+        <div class="row table-header">
+            <div class="col-xs-12">
+                <i class="fa fa-star"></i>
+                <spaan>Mentors</span>
+            </div>
+        </div>
+        <div class="row table-list">
+            <div class="col-xs-12">
+                <div class="row table-list-header">
+                    <div class="col-xs-1">#</div>
+                    <div class="col-xs-7">Name</div>
+                </div>
+
+                <div ng-class="{1:'even'}[$index%2]" class="row table-list-row" ng-repeat="mentor in mentors track by $index">
+                    <div class="col-xs-1 text">[[$index+1]].</div>
+                    <div class="col-xs-7 text">[[mentor.name]]</div>
+                    <div class="actions text-right col-xs-4">
+                        <a ng-href="/dashboard/mentor/[[mentor.id]]" class="action-link">
+                          <div class="action-icon">
+                            <i class="fa fa-eye "></i>
+                          </div>
+                          <div class="action-text">View</div>
+                        </a>
+                        <a ng-show="!inProgress['mentors'][$index] && {'INACTIVE':true}[mentor.status]" href="#mentors" ng-click="activate($index,'mentors', true)"b class="action-link">
+                          <div class="action-icon">
+                            <i class="fa fa-user"></i>
+                            <i class="fa fa-plus"></i>
+                          </div>
+                          <div class="action-text">Activate</div>
+                        </a>
+                        <a ng-show="!inProgress['mentors'][$index] && {'ACTIVE':true}[mentor.status]" href="#mentors" ng-click="activate($index,'mentors', false)" class="action-link">
+                          <div class="action-icon">
+                            <i class="fa fa-user"></i>
+                            <i class="fa fa-minus"></i>
+                          </div>
+                          <div class="action-text">Deactivate</div>
+                        </a>
+                        <div class="action-link" ng-show="inProgress['mentors'][$index]">
+                            <div class="action-icon">
+                                <i class="fa fa-cog fa-spin"></i>
+                            </div>
+                            <div class="action-text">Updating</div>
+                        </div>
+                    </div>
+
+                        <!--
+                        <td>
+                            <a href="" ng-click="activate(mentor)" class="activate_button" ng-hide="mentor.status == 'ACTIVE'" ng-show="mentor.status == 'INACTIVE'"> ACTIVATE </a>
+                            <a href="" ng-click="de_activate(mentor)" class="deactivate_button" ng-show="mentor.status == 'ACTIVE'" ng-hide="mentor.status == 'INACTIVE'"> DEACTIVATE </a>
+                        </td>
+                        <td><a href="/user/adminmentor/mentee/[[mentor.id]]" class="view_button">VIEW</a></td>
+                        -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="page" ng-show="mentor_pages > 1">
+            <ul class="pagination">
+                <li class="arrow unavailable">
+                    <a href="" ng-click="select_mentor_page(-1)">&laquo;</a>
+                </li>
+                <li ng-repeat="page in range(mentor_pages)" ng-class="getClass($index+1)">
+                    <a href="" ng-click="select_mentor_page($index+1)">[[$index+1]]</a>
+                </li>
+                <!-- <li class="unavailable">
+                    <a href="">&hellip;</a>
+                </li>  -->
+                <li class="arrow">
+                    <a href="" ng-click="select_mentor_page(0)">&raquo;</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

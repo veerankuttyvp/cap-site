@@ -1,0 +1,6 @@
+<?php $this->headScript()->prependFile($this->basePath() . '/js/'. strtolower($this->identity()->getRole()->getName()) .'.min.js') ?>
+<div class="row" ng-controller="AdminCtrl" ng-init="init('<?php echo $admin->getId()?>')">
+    <div class="col-xs-10 col-xs-offset-1">
+        <?php echo $this->partial("cap/partials/customer-info", array('type' => 'admin', 'title' => 'Admin Information', 'customer' => $admin)) ?>
+	  </div>
+</div>

@@ -1,0 +1,60 @@
+<div class="content" ng-controller="MenteeSAQInterface" ng-init="init('<?php echo $id; ?>')">
+	<div ng-show="continue">
+		<h3 class="page_header_with_underline"> [[question.saq_name]] <span class="completion_percentage">[[question.completion_percentage]] 55% Complete</span></h3>
+		<p class="section_name"> Section [[question.section_id]]: [[question.section_name]]</p>
+		<div class="">
+			<p class="question_name"> [[question.id]]. [[question.questionText]]</p> 
+			<textarea ng-model="question.answer_textarea" ng-show="question.answer_type=='TEXTAREA'" class="textarea" placeholder="Type your answer here.." ></textarea>
+			<input type="text" ng-model="question.answer_text" ng-show="question.answer_type=='TEXT'" class="textinput"  placeholder="Type your answer here.." />
+			<select ng-model="question.answer_choice" ng-show="question.answer_type=='SELECT'" class="select">
+				<option ng-repeat="answer in answers" value="[[answer.id]]"> [[answer.answerText]] </option>
+			</select>
+			<select ng-model="question.selected_answers" ng-show="question.answer_type=='MULTISELECT'" multiple class="multi_select" size=[[answers.length]]>
+				<option ng-repeat="answer in answers" value="[[answer.id]]"> [[answer.answerText]] </option>
+			</select>
+			
+			<div class="checkbox_choices" ng-show="question.answer_type=='CHECKBOX'">
+				<p ng-repeat="answer in answers" class="checkbox_container"> 
+					<input ng-model="answer.selected" type="checkbox" value="[[answer.id]]" /> 
+					[[answer.answerText]]
+				</p>
+			</div>
+			<div class="radio_choices" ng-show="question.answer_type=='RADIO'">
+				<p ng-repeat="answer in answers" class="radio_container"> 
+					<input ng-model="question.radio_choice" type="radio" value="[[answer.id]]" />
+					[[answer.answerText]]
+				</p>
+			</div>
+			<div class="enumes" ng-show="question.answer_type=='ENUM'">
+				<table class="enume_table" border>
+					<tr ng-repeat="answer in answers">
+						<td> [[answer.answerText]] </td>
+						<td ng-repeat="enum in answer.answer_enum">  <input type="radio" name="[[answer.answerText]]" value="[[enum.id]]" ng-model="answer.selected_enume" /> [[enum.name]]</td>
+					</tr>
+				</table>
+			</div>
+			<p ng-show="question.answer_type=='finished'" class="message"> [[message]] </p>
+			
+		</div>
+	</div>
+	<div ng-show="pause">
+		<h3 class="page_header_with_underline"> Skills Assessment Questionnare</h3>	
+		<div class="saq_summary" >
+			<h3> [[saq.name]] <span class="completion_percentage">[[saq.completion_percentage]] Complete</span></h3>
+			<p class="saq_description">[[saq.description]]</p>
+			<table class="table table-stripped">
+				<tr ng-repeat="section in saq.sections" ng-class="{even: $index%2 == 0}">
+					<td> <h4>[[$index+1]].[[section.name]] </h4></td>
+					<td> [[section.completed_questions]] of [[section.total_questions]] Questions Completed</td>
+					<td ng-class="{green: section.status == 'In Progress', gray: section.status == 'Completed'}"> <b>[[section.status]]</b></td>
+				</tr>
+				<tr> <td colspan="3"> <input type="button" value="Continue" ng-click="continue_test()" class="continue_button" /> </td> </tr>
+			</table>
+
+		</div>	
+	</div>	
+	<div class="saq_button_div" ng-show="continue">
+		<input type="button" ng-hide="question.answer_type=='finished'" value="Save and Continue" class="save_button" ng-click="save_answer();" />
+		<input type="button" ng-hide="question.answer_type=='finished'" value="Pause" class="save_button" ng-click="pause_saq();" />
+	</div>
+</div>

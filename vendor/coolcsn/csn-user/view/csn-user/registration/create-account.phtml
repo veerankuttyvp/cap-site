@@ -1,0 +1,34 @@
+<div class="content" ng-controller="CreateAccountController" ng-init="init()">
+	<h3 class="page_header_with_underline"> Create a new Account </h3>
+	<div class="create_account">
+		<p class="">
+			<label class="account_type_label"> Account Type: </label>
+			<select ng-model="account_type" class="account_type">
+				<option value="mentor">Mentor</option>
+				<option vlaue="mentee">Mentee</option>
+			</select>
+		</p>
+		<p class="p_with_background"> 
+			<label> Name: </label>
+			<input type="text" ng-model="name" />
+		</p>
+		<p class="p_with_background"> 
+			<label> Title: </label>
+			<input type="text" ng-model="title" />
+		</p>
+		<p class="p_with_background"> 
+			<label> Phone Number: </label>
+			<input type="text" ng-model="phone_number" />
+		</p>
+		<p class="p_with_background"> 
+			<label> Email address: </label>
+			<input type="text" ng-model="email" />
+		</p>
+		<p > 
+			<p class="error_msg">[[msg]]</p>
+			<input type="button" ng-click="create_account()" value="Create" class="create_button" />
+		</p>
+		
+	</div>
+</div>
+

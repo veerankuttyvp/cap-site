@@ -1,0 +1,87 @@
+<!-- nav -->
+<nav class="navbar navbar-inverse navbar-static-top" ng-controller="NavCtrl">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a href="/" class="navbar-brand">Centurion Assessment Portal</a>
+		</div>
+          <?php if ($this->identity()) { ?>
+
+     		<div class="navbar-right">
+     			<div class="hover-menu-container" ng-mouseover="showMenu()" ng-mouseleave="hideMenu()">
+     				<i class="hover-menu-toggle fa fa-cog fa-2x"></i>
+     				<ul class="hover-menu hide">
+     					<!-- list depends on what role the person who is logged in is -->
+                              <li>
+                                   <a href="<?php echo $this->url('dashboard');?>">
+                                        <i class="fa fa-tachometer">
+                                             <span>Dashboard</span>
+                                        </i>
+                                   </a>
+                              </li>
+
+                              <!-- TODO implement this -->
+                              <?php if (0) { ?>
+     					<li>
+     						<a href="#">
+     							<i class="fa fa-file-text">
+     								<span>SAQ List</span>
+     							</i>
+     						</a>
+     					</li>
+                         	<li>
+                         		<a href="#">
+                         			<i class="fa fa-star">
+                         				<span>Mentor List</span>
+                         			</i>
+                         		</a>
+                         	</li>
+                              <li>
+                              	<a href="#">
+                              		<i class="fa fa-mortar-board">
+                              			<span>Mentee List</span>
+                              		</i>
+                              	</a>
+                              </li>
+                              <?php } //end if (0) ?>
+
+                              <?php
+                              if($this->identity()->getRole()->getName() == 'Admin') { ?>
+                              	<li>
+                              		<!--<a href="/user/reminderfrequency/setfrequency"> -->
+                                        <a href="<?php echo $this->url('dashboard', array('action' => 'settings'));?>">
+                              			<i class="fa fa-gears">
+                              				<span>Settings</span>
+                              			</i>
+                              		</a>
+                              	</li>
+                                   <li>
+                                        <a href="<?php echo $this->url('dashboard', array('action' => 'create'));?>">
+                                             <i class="fa fa-sun-o">
+                                                  <span>Create Account</span>
+                                             </i>
+                                        </a>
+                                   </li>
+                              <?php } ?>
+
+                              <li>
+                              	<a href="<?php echo $this->url('logout');?>">
+                              		<i class="fa fa-reply">
+                              			<span>Logout</span>
+                              		</i>
+                              	</a>
+                              </li>
+                         </ul>
+                    </div>
+               </div>
+
+               <div class="navbar-right navbar-logged-in-user-role navbar-logged-in-user-info">
+                    <?php echo $this->identity()->getName(); ?>
+               </div>
+
+               <div class="navbar-right navbar-logged-in-user-name navbar-logged-in-user-info">
+                    <?php echo $this->identity()->getRole()->getName(); ?>:&nbsp;
+               </div>
+
+          <?php } ?>
+	</div>
+</nav>

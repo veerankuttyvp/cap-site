@@ -1,0 +1,59 @@
+<?php $this->headScript()->prependFile($this->basePath() . '/js/login.min.js') ?>
+
+<div class="row">
+    <div class="login-box col-xs-12 col-md-6 col-md-offset-3" ng-controller="PasswordCtrl" ng-init="init('<?php echo $token ?>')">
+        <div class="row">
+            <div class="login-header col-xs-12">
+                <h2>Set Your Password</h2>
+            </div>
+        </div>
+        <div class="row">
+            <form novalidate name="passwordForm" class="col-xs-12" ng-submit="submitPassword()">
+                <div class="row" ng-show="success">
+                    <div class="col-xs-12 login-error">
+                        <div ng-show="passwordForm.$dirty && msg" class="alert alert-success">
+                            <i class="fa fa-cog fa-spin"></i>
+                            <span>[[msg]]</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" ng-hide="success">
+                    <div class="col-xs-12 login-error">
+                        <div ng-show="passwordForm.$dirty && msg" class="alert alert-warning">[[msg]]</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="text-input form-group col-xs-12">
+                        <div class="row">
+                            <label class="col-xs-5">Enter Password:</label>
+                            <div class="col-xs-7">
+                                <input class="form-control" type="password" name="password" ng-model="password" required/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="text-input form-group col-xs-12">
+                        <div class="row">
+                            <label class="col-xs-5">Confirm Password:</label>
+                            <div class="col-xs-7">
+                                <input class="form-control", type="password" name="password2" ng-model="password2" required/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <button type="submit" ng-disabled="inProgress" class="btn btn-primary form-control" name="submit">Login</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 text-right contact-admin">
+                        <a href="mailto:kwalpole@go-optimum.com" class="" > Contact Administrator </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

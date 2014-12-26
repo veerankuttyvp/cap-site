@@ -1,0 +1,111 @@
+ <body ng-controller="MenteeDetailController" ng-init="init('<?php echo $user; ?>', '<?php echo $role; ?>', '<?php echo $mentee_id; ?>')" id="mentor_metee_detail">
+    <div class="overlay" ng-show="show_popup"></div>
+    <div class="container_div">
+        <div class="popup login_box" ng-show="show_popup" >
+            <div id="create_new_note">
+                <div class="popup_header login_header"> 
+                    <h3> Create New Note </h3>
+                    <a href="" ng-click="show_popup=false;" class="close_button"> X </a>
+                </div>
+                <div class="popup_table_container"> 
+                    <div class="add_note">
+                        <p>
+                            <label> Title : </label>
+                            <input type="text" ng-model="current_note.title" />
+                        </p>
+                        <p>
+                            <label> Share with mentee : </label>
+                            <input type="checkbox" ng-model="current_note.share_with_mentee" />
+                        </p>
+                        <p> <a href="" ng-click="save_new_note()" class="view_button"> Save </a> </p>
+
+                    </div>
+                </div>
+            </div>             
+        </div>
+        <?php  echo $this->menuview ?>
+        <div class="table_container">              
+            <span class="table_list_header">
+                <span class="fa fa-graduation-cap"></span> Mentee 
+            </span>
+            <table class="table table-striped">
+                <tr>
+                    <th> # </th>
+                    <th> Name </th>
+                    <th> Phone Number </th>
+                    <th> Email Address </th>
+                </tr>
+                <tr>
+                    <td> 1 </td>
+                    <td> [[mentee.name]] </td>
+                    <td> [[mentee.phone_number]] </td>
+                    <td> [[mentee.email]] </td>
+                </tr>
+            </table>
+        </div>
+        <div class="table_container">
+            <span class="table_list_header">
+                <span class="fa fa-file-text"></span> Skill Assessment Questionaries 
+            </span>
+            <table class="table table-striped">
+                <tr>
+                    <th> # </th>
+                    <th> Name </th>
+                    <th> Status </th>
+                    <th> Actions </th>
+                </tr>
+                <tr ng-repeat="question in mentee_saq_list">
+                    <td> [[$index+1]] </td>
+                    <td> [[question.status]] </td>
+                    <td> [[question.name]] </td>
+                    <td> <a href="/user/adminmentee/saqresult/[[question.id]]" class="view_button"> VIEW </a> </td>
+                </tr>
+            </table>
+        </div>
+        <div class="table_container">
+            <span class="table_list_header">
+                <span class="fa fa-bookmark"></span> Notes 
+            </span> 
+            <a href="" class="view_button create_note" ng-click="create_note()"> CREATE NEW NOTE </a>
+
+            <table class="table table-striped">
+                <tr>
+                    <th> # </th>
+                    <th> Title </th>
+                    <th> Date </th>
+                    <th> Share w/ Mentee </th>
+                    <th> Actions </th>
+                    <th> &nbsp; </th>
+                </tr>
+                <tr ng-repeat="note in menteenotes">
+                    <td> [[$index+1]] </td>
+                    <td> [[note.title]] </td>
+                    <td> [[note.created]] </td>
+                    <td> &nbsp; </td>
+                    <td> <a href="" class="view_button" ng-click="delete_note(note)" style="float: left; margin-right: 10px;"> DELETE </a> <a href="" class="view_button" ng-click="edit_note(note)" style="float: left"> EDIT </a></td>
+                    <td>  </td>
+                </tr>
+            </table>
+        </div>
+        <div class="table_container">
+            <span class="table_list_header">
+                <span class="fa fa-bookmark"></span> Notes Shared With You
+            </span> 
+            <table class="table table-striped">
+                <tr>
+                    <th> # </th>
+                    <th> Title </th>
+                    <th> Date </th>
+                    <th> Actions </th>
+                </tr>
+                <tr ng-repeat="notesh in menteesharednotes">
+                    <td> [[$index+1]] </td>
+                    <td> [[notesh.title]] </td>
+                    <td> [[notesh.created]] </td>
+                    <td> <a href="/user/mentormentee/note/[[note.id]]" class="view_button"> VIEW </a> </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+

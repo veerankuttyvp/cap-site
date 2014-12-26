@@ -1,0 +1,87 @@
+<div class="row" id="mentees" ng-show="mentees">
+    <div class="table-container col-xs-12">
+        <div class="row table-header">
+            <div class="col-xs-12">
+                <i class="fa fa-graduation-cap"></i>
+                <span>Mentees</span>
+            </div>
+        </div>
+        <div class="row table-list">
+            <div class="col-xs-12">
+                <div class="row table-list-header">
+                    <div class="col-xs-1">#</div>
+                    <div class="col-xs-7">Name</div>
+                </div>
+
+                <div ng-class="{1:'even'}[$index%2]" class="row table-list-row" ng-repeat="mentee in mentees track by $index">
+                    <div class="col-xs-1 text">[[$index+1]].</div>
+                    <div class="col-xs-7 text">[[mentee.name]]</div>
+                    <div class="actions text-right col-xs-4">
+                        <a ng-href="/dashboard/mentee/[[mentee.id]]" class="action-link">
+                          <div class="action-icon">
+                            <i class="fa fa-eye "></i>
+                          </div>
+                          <div class="action-text">View</div>
+                        </a>
+                        <a ng-show="!inProgress['mentees'][$index] && {null:true}[mentee.mentor] && mentors" ng-click="assignMenteeModal($index)" data-toggle="modal" data-target="#assign-mentee-modal" href="#assign-mentee-modal" class="action-link">
+                          <div class="action-icon">
+                            <i class="fa fa-group "></i>
+                          </div>
+                          <div class="action-text">Assign</div>
+                        </a>
+                        <a ng-show="!inProgress['mentees'][$index] && !{null:true}[mentee.mentor] && mentors" ng-click="assignMenteeModal($index)" data-toggle="modal" data-target="#assign-mentee-modal" href="#assign-mentee-modal" class="action-link">
+                          <div class="action-icon">
+                            <i class="fa fa-group "></i>
+                          </div>
+                          <div class="action-text">Reassign</div>
+                        </a>
+                        <!-- TODO only show if admin -->
+                        <a ng-show="!inProgress['mentees'][$index] && {'INACTIVE':true}[mentee.status]" href="#mentees" ng-click="activate($index,'mentees', true)"b class="action-link">
+                          <div class="action-icon">
+                            <i class="fa fa-user"></i>
+                            <i class="fa fa-plus"></i>
+                          </div>
+                          <div class="action-text">Activate</div>
+                        </a>
+                        <a ng-show="!inProgress['mentees'][$index] && {'ACTIVE':true}[mentee.status]" href="#mentees" ng-click="activate($index,'mentees', false)" class="action-link">
+                          <div class="action-icon">
+                            <i class="fa fa-user"></i>
+                            <i class="fa fa-minus"></i>
+                          </div>
+                          <div class="action-text">Deactivate</div>
+                        </a>
+                        <div class="action-link" ng-show="inProgress['mentees'][$index]">
+                            <div class="action-icon">
+                                <i class="fa fa-cog fa-spin"></i>
+                            </div>
+                            <div class="action-text">Updating</div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="page" ng-show="mentee_pages > 1">
+            <ul class="pagination">
+                <li class="arrow unavailable">
+                    <a href="" ng-click="select_mentee_page(-1)">&laquo;</a>
+                </li>
+                <li ng-repeat="page in range(mentee_pages)" ng-class="getClass($index+1)">
+                    <a href="" ng-click="select_mentee_page($index+1)">[[$index+1]]</a>
+                </li>
+                <!-- <li class="unavailable">
+                    <a href="">&hellip;</a>
+                </li>  -->
+                <li class="arrow">
+                    <a href="" ng-click="select_mentee_page(0)">&raquo;</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

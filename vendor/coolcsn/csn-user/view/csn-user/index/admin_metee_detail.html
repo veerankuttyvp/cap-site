@@ -1,0 +1,21 @@
+<body ng-controller="AdminMenteeController" ng-init="init('<?php echo $user; ?>', '<?php echo $role; ?>', '<?php echo $mentee_id; ?>')" id="admin_metee_detail">
+    <div class="container_div">
+        <?php  echo $this->menuview ?>
+        <div class="table_container">
+        	<span class="table_list_header"><span class="fa fa-file-text"></span> Skill Assessment Questionaries </span>
+        	<table class="table table-striped">
+        		<tr>
+                    <th> # </th>
+        			<th> Name </th>
+        			<th> Action </th>
+        		</tr>
+        		<tr ng-repeat="question in mentee_saq_list">
+                    <td> [[$index+1]] </td>
+        			<td> [[question.name]] </td>
+        			<td> <a href="/user/mentee/saqview/[[question.id]]" class="view_button"> VIEW </a> </td>
+        		</tr>
+        	</table>
+        </div>			
+    </div>
+</body>
+

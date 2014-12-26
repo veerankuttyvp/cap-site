@@ -1,0 +1,50 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="en" ng-app="cap">
+    <head>
+        <meta charset="utf-8">
+        <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+        <?php echo $this->headTitle($this->translate('Centurion Assesment Portal'))->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?php echo $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+        <!-- Le styles -->
+        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+                        ->prependStylesheet($this->basePath() . '/css/style.css')
+                        ->prependStylesheet($this->basePath() . '/css/bootstrap-theme.min.css')
+                        ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css')
+                        ->prependStylesheet($this->basePath() . '/css/font-awesome-4.1.0/css/font-awesome.css') ?>
+
+        <!-- Scripts -->
+        <?php echo $this->headScript()
+            ->prependFile($this->basePath() . '/js/bootstrap.min.js')
+            ->prependFile($this->basePath() . '/js/respond.min.js', 'text/javascript')
+            ->prependFile($this->basePath() . '/js/html5shiv.js',   'text/javascript')
+            ->prependFile($this->basePath() . '/js/angular_app/lib/angular/angular-resource.js', 'text/javascript')
+            ->prependFile($this->basePath() . '/js/angular_app/app.js',   'text/javascript')
+            ->prependFile($this->basePath() . '/js/angular_app/directives.js',   'text/javascript')
+            ->prependFile($this->basePath() . '/js/angular_app/controllers.js',   'text/javascript')
+            ->prependFile($this->basePath() . '/js/angular_app/services.js',   'text/javascript')
+            ->prependFile($this->basePath() . '/js/jquery.min.js')
+            ->prependFile($this->basePath() . '/js/angular_app/lib/angular/angular-cookies.js', 'text/javascript')
+            ->prependFile($this->basePath() . '/js/angular_app/lib/angular/angular.js', 'text/javascript')
+
+
+        ; ?>
+    </head>
+
+<?php
+$children = $this->viewModel()->getCurrent()->getChildren();
+$child = $children[0];
+
+#echo $this->escape($child->role);
+
+
+?>
+<?php echo $this->content; ?>
+<?php echo $this->inlineScript() ?>
+
+</html>

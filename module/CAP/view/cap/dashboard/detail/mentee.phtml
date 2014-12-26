@@ -1,0 +1,19 @@
+<?php $this->headScript()->prependFile($this->basePath() . '/js/'. strtolower($this->identity()->getRole()->getName()) .'.min.js') ?>
+
+<div class="row" ng-controller="MenteeCtrl" ng-init="init('<?php echo $mentee->getId()?>')">
+    <div class="col-xs-10 col-xs-offset-1">
+        <?php
+	      	echo $this->partial("cap/partials/view-note-modal");
+	      	echo $this->partial("cap/partials/edit-note-modal");
+	      	echo $this->partial("cap/partials/create-note-modal");
+        	echo $this->partial("cap/partials/customer-info", array('type' => 'mentee', 'title' => 'Mentee Information', 'customer' => $mentee));
+	      	echo $this->partial("cap/partials/mentors-list");
+	      	echo $this->partial("cap/partials/saq-list");
+	      	if ($this->identity()->getRole()->getName() !== 'Admin') {
+	      		echo $this->partial("cap/partials/notes-list",array('title' => 'My Notes','notes' => 'myNotes'));
+	      		echo $this->partial("cap/partials/notes-list",array('title' => 'Notes Shared With Me','notes' => 'sharedNotes'));
+	      	}
+	      ?>
+	  </div>
+</div>
+

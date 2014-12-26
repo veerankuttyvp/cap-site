@@ -1,0 +1,21 @@
+<body ng-controller="AdminMenteeSAQDetailController" ng-init="init('<?php echo $user; ?>', '<?php echo $role; ?>', '<?php echo $saq_id; ?>')" id="admin_metee_detail">
+    <div class="container_div">         
+        <?php  echo $this->menuview ?>
+        <div class="content">
+            <h3 class="page_header_with_underline"> [[saq.title]] [[saq.percentage]]</h3>
+            <p> 
+                <span> Results </span> 
+                <a href="#"> 
+                    <span class="fa fa-file-text"></span> 
+                    Download as PDF 
+                </a> 
+            </p>
+            <h3 class=""> Reccomented Development Areas: </h3>
+            <div class="table_container" ng-repeat="rda in saq.rdas">
+                <span class="table_list_header"><span class="fa fa-file-text"></span> [[rda.title]] </span>
+                <p> [[rda.text]] </p>
+            </div>          
+        </div>
+    </div>
+</body>
+

@@ -1,0 +1,65 @@
+<div class="row" ng-show="saqList">
+    <div class="table-container col-xs-12">
+        <div class="row table-header">
+            <div class="col-xs-12">
+                <i class="fa fa-file-text"></i>
+                <span>Self Assessment Questionnaires</span>
+            </div>
+        </div>
+        <div class="row table-list">
+            <div class="col-xs-12">
+                <div class="row table-list-header">
+                    <div class="col-xs-1">#</div>
+                    <div class="col-xs-7">Name</div>
+                </div>
+
+                <div ng-class="{1:'even'}[$index%2]" class="row table-list-row" ng-repeat="saq in saqList track by $index">
+                    <div class="col-xs-1 text">[[$index+1]].</div>
+                    <div class="col-xs-7 text">[[saq.name]]</div>
+                    <div class="actions text-right col-xs-4">
+                        <a ng-href="/dashboard/saq/[[saq.id]]" class="action-link">
+                          <div class="action-icon">
+                            <i class="fa fa-eye "></i>
+                          </div>
+                          <div class="action-text">View</div>
+                        </a>
+                        <a ng-show="mentees" ng-click="assignSaqModal($index)" data-toggle="modal" data-target="#assign-saq-modal" href="#assign-saq-modal" class="action-link">
+                          <div class="action-icon">
+                            <i class="fa fa-group "></i>
+                          </div>
+                          <div class="action-text">Assign</div>
+                        </a>
+                        <div class="action-link" ng-show="inProgress['saqList'][$index]">
+                            <div class="action-icon">
+                                <i class="fa fa-cog fa-spin"></i>
+                            </div>
+                            <div class="action-text">Updating</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+  	<?php /* paginate */ ?>
+    <div class="page" ng-show="que_pages > 1">
+        <ul class="pagination">
+            <li class="arrow unavailable">
+                <a href="" ng-click="select_ques_page(-1)">&laquo;</a>
+            </li>
+            <li ng-repeat="page in range(que_pages)" ng-class="getClass($index+1)">
+                <a href="" ng-click="select_ques_page($index+1)">[[$index+1]]</a>
+            </li>
+            <!-- <li class="unavailable">
+                <a href="">&hellip;</a>
+            </li>  -->
+            <li class="arrow">
+                <a href="" ng-click="select_ques_page(0)">&raquo;</a>
+            </li>
+        </ul>
+    </div>
+  </div>
+</div>

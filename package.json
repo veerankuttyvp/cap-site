@@ -1,0 +1,21 @@
+{
+  "name": "cap-website",
+  "description": "Centurion Assessment Portal",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:bluesman/cap-website.git"
+  },
+  "engine": {
+    "node": ">=0.10.25"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-less": "^0.11.4",
+    "grunt-contrib-uglify": "^0.5.1",
+    "grunt-contrib-watch": "^0.6.1"
+  }
+}

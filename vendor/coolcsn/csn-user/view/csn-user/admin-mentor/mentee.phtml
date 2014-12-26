@@ -1,0 +1,41 @@
+<body ng-controller="MentorMenteeController" ng-init="init(<?php echo $mentor_id; ?>)" id="dashboard">
+	<div class="container_div">
+        <?php  echo $this->menuview ?>
+        <div class="table_container" style="padding-bottom:0px;">
+	        <h3 class="page_header_with_underline"> Mentor Information: </h3>
+	        <div class="mentor_info">
+	        	<p class=""> 
+					<label> Name: </label> <span> [[mentor.name]] test</span>				
+				</p>
+				<p class=""> 
+					<label> Title: </label> <span> [[mentor.title]] test </span>				
+				</p>
+				<p class=""> 
+					<label> Phone Number: </label> <span> [[mentor.phon_number]] test </span>
+				</p>
+				<p class=""> 
+					<label> Email address: </label> <span> <a href="">[[mentor.email_addresss]] remya@gmail.com</a> </span>
+				</p>
+				<div class="clear"></div>
+	        </div>
+	    </div>
+      	<div class="table_container">
+			<span class="table_list_header"><span class="fa fa-mortar-board"></span> Mentees </span>
+			<table class="table table-striped">
+				<tr>
+					<th> # </th>
+					<th> Name </th>
+					<th> Status </th>
+					<th> Actions </th>
+					<th> &nbsp; </th>
+				</tr>
+				<tr ng-repeat="mentee in mentees">
+					<td> [[$index]] </td>
+					<td> [[mentee.firstName]] </td>
+					<td> [[mentee.status]] </td>
+					<td> <a href="#" class="assign_button" > VIEW </a>  <a href="" class="reassign_button" ng-click="delete_mentor_mentees(mentee)" > DELETE </a>						
+				</tr>
+			</table>
+		</div>   
+	</div>
+</body>		

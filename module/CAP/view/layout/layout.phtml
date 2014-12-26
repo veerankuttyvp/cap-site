@@ -1,0 +1,41 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="en" ng-app="cap">
+    <head>
+        <meta charset="utf-8">
+        <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Roboto Condensed' rel='stylesheet' type='text/css'>
+        <?php echo $this->headTitle($this->translate('Centurion Assesment Portal'))->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?php echo $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+        <!-- Le styles -->
+        <?php
+            /*
+            echo $this->headLink(array('rel' => 'shortcut icon',
+                                       'type' => 'image/vnd.microsoft.icon',
+                                       'href' => $this->basePath() . '/img/favicon.ico'));
+            */
+            echo $this->headLink()->prependStylesheet($this->basePath() . '/css/style.css');
+        ?>
+
+        <!-- Scripts -->
+        <?php echo $this->headScript()
+            ->prependFile($this->basePath() . '/js/cap.min.js')
+            //->prependFile($this->basePath() . '/js/respond.min.js', 'text/javascript')
+            //->prependFile($this->basePath() . '/js/html5shiv.js',   'text/javascript')
+        ; ?>
+    </head>
+    <body>
+        <?php echo $this->partial('layout/nav') ?>
+        <div class="container-fluid">
+            <?php echo $this->content ?>
+            <?php echo $this->partial('layout/footer') ?>
+        </div>
+
+        <?php echo $this->inlineScript() ?>
+    </body>
+</html>

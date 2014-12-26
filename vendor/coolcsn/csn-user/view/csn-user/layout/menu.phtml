@@ -1,0 +1,18 @@
+
+ <div class="container_header">
+    <span> Centurion Assessment Portal </span>
+    <div class="header_right">
+        <div ng-mouseover="show_menu()" ng-mouseleave="hide_menu()" class="icon_container">
+            <a href="#" class="menu_icon" ng-click="show_menu()"><span class="fa fa-cog fa-lg"></span></a>
+            <ul class="menu" id="menu">
+                <li> <a href="#"> <span class="fa fa-file-text"></span> &nbsp;&nbsp;&nbsp;SAQ List </a></li>
+           <?php if($role == 4) {?>  <li> <a href="#"> <span class="fa fa-star"></span> &nbsp;&nbsp;&nbsp;Mentor List </a></li> <?php } ?>
+                <li> <a href="#"> <span class="fa fa-mortar-board"></span> &nbsp;&nbsp;&nbsp;Mentee List </a></li>
+             <?php if($role == 4) { ?> <li> <a href="/user/reminderfrequency/setfrequency"> <span class="fa fa-gears"> &nbsp;&nbsp;&nbsp;Settings </span></a></li> <?php } ?>
+           <?php if($role == 4) { ?><li> <a href="<?php echo $this->url('create-account', array('action' => 'createaccount'));?>"> <span class="fa fa-sun-o"> &nbsp;&nbsp;&nbsp;Create Account</span> </a></li> <?php } ?>
+                <li> <a href="<?php echo $this->url('user-index', array('action' => 'logout'));?>"> <span class="fa fa-reply"> &nbsp;&nbsp;&nbsp;Logout </span> </a> </li>
+            </ul>
+        </div>
+        <span class="user_details"> [[user_type]] : <?php echo $name; ?> </span>
+   </div>
+ </div>

@@ -1,0 +1,17 @@
+<div class="login_box" ng-controller="LoginController" ng-init="init()">
+  <div class="login_header">
+    <span> Login to Centurion Assessment Portal </span>
+  </div>
+  <form>
+    <p> 
+      <label> Email Address: </label> <input type="text" name="email" ng-model="email" />
+    </p>
+    <p> 
+      <label> Password: </label> <input type="password" name="password" ng-model="password" />
+    </p>
+    <a href="register/reset-password" class="forgot_pass_a"> Forgot Password </a>
+    <span class="error_msg">[[msg]]</span>
+    <input type="button" class="login_button" name="submit" value="Login" ng-click="submit_login()" /> <br /> <br />
+    <a href="mailto:hafsalmetvr@gmail.com" class="contact_admin" > Contact Administrator </a>
+  </form>
+</div>

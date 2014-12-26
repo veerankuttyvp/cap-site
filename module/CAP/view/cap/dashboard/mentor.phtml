@@ -1,0 +1,9 @@
+<?php //TODO: what to do if there are no mentees for a mentor ?>
+
+<div class="row" ng-controller="DashboardCtrl", ng-init="init()" id="dashboard">
+    <div class="col-xs-10 col-xs-offset-1">
+        <?php
+            echo $this->partial('/cap/partials/mentees-list');
+        ?>
+    </div>
+</div>

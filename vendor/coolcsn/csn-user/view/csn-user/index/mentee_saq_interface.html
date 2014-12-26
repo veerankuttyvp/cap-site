@@ -1,0 +1,31 @@
+<div class="content" ng-controller="MenteeSAQInterface" ng-init="init()">
+	<h3 class="page_header_with_underline"> [[saq.name]] [[saq.completion_percentage]]</h3>
+	<p> [[saq.section_no]]: [[saq.section_name]]</p>
+	<div class="" ng-repeat="question in saq.section.questions">
+		<p>[[question.number]]. [[question.question]]</p>
+		<textarea ng-model="question.textarea"></textarea>
+		<input type="text" ng-model="question.text" />
+		<select ng-model="question.choice">
+			<option ng-repeat="option in question.choices"> [[option]] </option>
+		</select>
+		<div class="question_options">
+			<p ng-repeat="option in question.multi_options" ng-click="select_option(option);"> [[option]]  </p>
+		</div>
+		<div class="checkbox_choices">
+			<p ng-repeat="choice in checkbox_choices"> <input ng-model="check_box_choice" type="checkbox" value="choice" /></p>
+		</div>
+		<div class="radio_choices">
+			<p ng-repeat="choice in radio_choices"> <input ng-model="radio_choice" type="radio" value="choice" /></p>
+		</div>
+		<div class="enumes">
+			<table>
+				<tr ng-repeat="enume in enumes">
+					<td> [[enume]] </td>
+					<td> Agree <input type="radio" value="agree" /></td>
+					<td> Don't care <input type="radio" value="dont_care" /></td>
+					<td> Disagree<input type="radio" value="disagree" /></td>
+				</tr>
+			</table>
+		</div>
+	</div>	
+</div>

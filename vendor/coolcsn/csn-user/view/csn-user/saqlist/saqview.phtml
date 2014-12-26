@@ -1,0 +1,51 @@
+		<body ng-controller="QuestionairController" ng-init="init('<?php echo $id; ?>')" id="dashboard">
+                    <div class="container_div">
+			<div class="container_header">
+				<span> Centurian Assessment Portal </span>
+				<div class="header_right">
+					<span class="user_details"> [[user_type]] : Admin name </span>
+					<div ng-mouseover="show_menu()" ng-mouseleave="hide_menu()" >
+						<a href="#" class="menu_icon" ng-click="show_menu()"></a>
+						<ul class="menu" id="menu">
+							<li> <a href="#"> SAQ List </a></li>
+							<li> <a href="#"> Mentor List </a></li>
+							<li> <a href="#"> Mentee List </a></li>
+							<li> <a href="/user/reminderfrequency/setfrequency"> Settings </a></li>
+							<li> <a href="<?php echo $this->url('create-account', array('action' => 'createaccount'));?>"> Create Account </a></li>
+							<li> <a href="<?php echo $this->url('user-index', array('action' => 'logout'));?>"> Logout </a> </li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="table_container">
+				<span> Skill Assessment Questionaries </span>
+				<table class="table">
+					<tr>
+						<th> Name </th>
+						<th> Text </th>
+						<th ng-show="user_type=='Mentee'"> Answers </th>
+					</tr>
+					<tr ng-repeat="question in questions">
+						<td> [[question.name]] </td>
+						<td> [[question.questionText]] </td>
+						<td> <span ng-repeat="answer in question.answers ">[[answer]]</span> </td>
+					</tr>
+				</table>
+                            
+                       
+			</div>			
+		</div>
+
+                <span> Results </span>
+                <a href="#"> 
+                    <span class="fa fa-file-text"></span> 
+                    Download as PDF 
+                </a>
+            </p>
+            <h3 class=""> Reccomented Development Areas: </h3>
+            <div class="table_container" ng-repeat="rda in saq">
+                <span class="table_list_header"><span class="fa fa-file-text"></span> [[rda.name]] </span>
+                <p> [[rda.description]] </p>
+            </div>
+  
+	</body>

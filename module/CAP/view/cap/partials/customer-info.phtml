@@ -1,0 +1,49 @@
+<?php
+	/*TODO: make this a helper */
+	$icons = array(
+		'admin' => 'fa-globe',
+		'mentor' => 'fa-star',
+		'mentee' => 'fa-graduation-cap',
+		'questionnaire' => 'fa-file-text'
+	);
+?>
+<div class="row">
+    <div class="col-xs-12">
+        <h1>
+        	<i class="fa <?php echo $icons[$type] ?>"></i>
+        	<span><?php echo $title ?></span>
+        </h1>
+    </div>
+</div>
+<div class="row detail">
+	<div class="col-xs-12">
+    <div class="row">
+        <label class="col-sm-4 col-md-3">Name:</label>
+        <div class="col-sm-8 col-md-9 detail-info"><?php echo $customer->getName()?></div>
+    </div>
+    <div class="row">
+        <label class="col-sm-4 col-md-3">Status:</label>
+        <div class="col-sm-8 col-md-9 detail-info"><?php echo $customer->getStatus()->getName()?></div>
+    </div>
+    <?php if ($customer->getTitle()) { ?>
+	    <div class="row">
+	        <label class="col-sm-4 col-md-3">Title:</label>
+	        <div class="col-sm-8 col-md-9 detail-info"><?php echo $customer->getTitle()?></div>
+	    </div>
+	  <?php } ?>
+    <?php if ($customer->getPhoneNumber()) { ?>
+	    <div class="row">
+	        <label class="col-sm-4 col-md-3">Phone Number:</label>
+	        <div class="col-sm-8 col-md-9 detail-info"><?php echo $customer->getPhoneNumber()?></div>
+	    </div>
+    <?php } ?>
+    <?php if ($customer->getEmail()) { ?>
+	    <div class="row">
+	        <label class="col-sm-4 col-md-3">Email Address:</label>
+	        <div class="col-sm-8 col-md-9 detail-info">
+	        	<a href="mailto:<?php echo $customer->getEmail()?>"><?php echo $customer->getEmail()?></a>
+	        </div>
+	    </div>
+    <?php } ?>
+  </div>
+</div>

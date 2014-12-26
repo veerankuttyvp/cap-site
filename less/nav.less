@@ -1,0 +1,59 @@
+nav {
+	.container-fluid {
+		padding-right:0px;
+	}
+	.navbar-header {
+		color:@white;
+    font-family: 'Roboto Condensed';
+
+   	.navbar-brand {
+   		color:@white;
+	    font-size:1.5em;
+   	}
+	}
+
+	.navbar-logged-in-user-info {
+		color:@white;
+		font-size: 1.5em;
+		font-family: "Roboto Condensed";
+		font-weight: normal;
+		line-height: 48px;
+	}
+
+ 	.hover-menu-container {
+ 		.hover-menu-toggle {
+ 			color:@gray2;
+ 			height:50px;
+ 			width:50px;
+ 			line-height: 50px;
+ 			text-align: center;
+ 			display:block;
+ 			margin-left:20px;
+ 		}
+ 	}
+ 	.hover-menu-container.active {
+ 		.hover-menu-toggle {
+ 			background-color: @gray2;
+ 			color:@black;
+ 		}
+ 		ul.hover-menu {
+ 			right:0px;
+ 			position:absolute;
+ 			background-color:@gray2;
+ 			padding:15px 0px 15px 0px;
+ 			li {
+ 				font-family: "Roboto";
+ 				list-style: none;
+ 				display: block;
+	 			a {
+	 				display: block;
+	 				padding:5px 30px 5px 30px;
+	 				color:@black;
+	 			}
+	 			a:hover {
+	 				background-color:@gray1;
+	 			}
+	 		}
+ 		}
+ 	}
+}

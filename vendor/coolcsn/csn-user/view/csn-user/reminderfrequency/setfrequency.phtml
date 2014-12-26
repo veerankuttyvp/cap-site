@@ -1,0 +1,25 @@
+<body ng-controller="SettingsController" ng-init="init()">
+        <div class="container_div">
+
+            <?php  echo $this->menuview ?>
+		<div class="content" >
+			<h3 class="page_header_with_underline"> Settings </h3>
+			<div class="create_account">
+				<p class="">
+					<label class="account_type_label"> Reminder Interval: </label>
+					<select ng-model="reminder_interval" class="account_type">
+						<option value="DAILY">DAILY</option>
+						<option vlaue="WEEKLY">WEEKLY</option>
+						<option vlaue="MONTHLY">MONTHLY</option>
+						<option vlaue="QUARTERLY">QUARTERLY</option>
+					</select>
+				</p>
+				<p> 
+					<p class="error_msg">[[msg]]</p>
+					<input type="button" ng-click="save_settings()" value="Save" class="create_button" />
+				</p>		
+			</div>
+		</div>
+
+        </div>
+</body>

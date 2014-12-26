@@ -1,0 +1,12 @@
+<?php $this->headScript()->prependFile($this->basePath() . '/js/'. strtolower($this->identity()->getRole()->getName()) .'.min.js') ?>
+<div class="row" ng-controller="MentorCtrl" ng-init="init('<?php echo $mentor->getId()?>')">
+    <div class="col-xs-10 col-xs-offset-1">
+		    <?php
+		    	if ($this->identity()->getRole()->getName() === 'Admin') {
+		    		echo $this->partial('/cap/partials/assign-mentee-modal');
+		    	}
+		    ?>
+        <?php echo $this->partial("cap/partials/customer-info", array('type' => 'mentor', 'title' => 'Mentor Information', 'customer' => $mentor)) ?>
+	      <?php echo $this->partial("cap/partials/mentees-list")?>
+	  </div>
+</div>

@@ -1,0 +1,92 @@
+<div class="row" ng-show="<?php echo $notes ?>">
+    <div class="table-container col-xs-12">
+        <div class="row table-header">
+            <div class="col-xs-8">
+                <i class="fa fa-bookmark"></i>
+                <span><?php echo $title ?></span>
+            </div>
+            <?php if ($notes == 'myNotes') {?>
+              <div class="col-xs-4 text-right">
+                  <a href="#create-note-modal" data-toggle="modal" class="small-text" data-target="#create-note-modal" ng-click="createNoteModal()">
+                    <i class="fa fa-file-text"></i>
+                    <span>Create New Note</span>
+                  </a>
+              </div>
+            <?php } ?>
+        </div>
+        <div class="row table-list small-text">
+            <div class="col-xs-12">
+                <div class="row table-list-header">
+                    <div class="col-xs-1">#</div>
+                    <div class="col-xs-3">Name</div>
+                    <div class="col-xs-3">Date</div>
+                    <div class="col-xs-1 text-center">Shared</div>
+                </div>
+
+                <div ng-class="{1:'even'}[$index%2]" class="row table-list-row" ng-repeat="note in <?php echo $notes?> track by $index">
+                    <div class="col-xs-1 text">[[$index+1]].</div>
+                    <div class="col-xs-3 text">[[note.name]]</div>
+                    <div class="col-xs-3 text">[[note.created | mysqlDate | date:'short']]</div>
+                    <div class="col-xs-1 text text-center">
+                      <i ng-show="note.share" class="fa fa-check-circle-o green"></i>
+                      <i ng-hide="note.share" class="fa fa-ban red"></i>
+                    </div>
+
+                    <div class="actions text-right col-xs-4">
+                        <a ng-href="#view-note-modal" data-target="#view-note-modal" data-toggle="modal" ng-click="viewNoteModal($index,'<?php echo $notes?>')" class="action-link">
+                          <div class="action-icon">
+                            <i class="fa fa-eye "></i>
+                          </div>
+                          <div class="action-text">View</div>
+                        </a>
+
+                        <?php if ($notes === 'myNotes') { ?>
+                          <a ng-click="editNoteModal($index)" data-toggle="modal" data-target="#edit-note-modal" href="#edit-note-modal" class="action-link">
+                            <div class="action-icon">
+                              <i class="fa fa-pencil"></i>
+                            </div>
+                            <div class="action-text">Edit</div>
+                          </a>
+
+                          <a ng-show="!inProgress['<?php echo $notes?>'][$index]" ng-click="deleteNote($index)" href="#" class="action-link">
+                            <div class="action-icon">
+                              <i class="fa fa-trash-o"></i>
+                            </div>
+                            <div class="action-text">Delete</div>
+                          </a>
+                        <?php } ?>
+
+                        <div class="action-link" ng-show="inProgress['<?php echo $notes?>'][$index]">
+                            <div class="action-icon">
+                                <i class="fa fa-cog fa-spin"></i>
+                            </div>
+                            <div class="action-text">Updating</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+  	<?php /* paginate */ ?>
+    <div class="page" ng-show="que_pages > 1">
+        <ul class="pagination">
+            <li class="arrow unavailable">
+                <a href="" ng-click="select_ques_page(-1)">&laquo;</a>
+            </li>
+            <li ng-repeat="page in range(que_pages)" ng-class="getClass($index+1)">
+                <a href="" ng-click="select_ques_page($index+1)">[[$index+1]]</a>
+            </li>
+            <!-- <li class="unavailable">
+                <a href="">&hellip;</a>
+            </li>  -->
+            <li class="arrow">
+                <a href="" ng-click="select_ques_page(0)">&raquo;</a>
+            </li>
+        </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<?php
+  /* manage the views depending on what rolw the user is */
+  $customer = $this->identity();
+	$role = strtolower($customer->getRole()->getName());
+	$this->headScript()->prependFile($this->basePath() . '/js/'.$role.'.min.js');
+  $partial = 'cap/dashboard/'.$role;
+  echo $this->partial($partial);
+
+?>
